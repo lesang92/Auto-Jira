@@ -1,0 +1,10 @@
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Auto-Jira.exe.config
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Auto-Jira.exe
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Auto-Jira.pdb
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csprojAssemblyReference.cache
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto_Jira.Form1.resources
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto_Jira.Properties.Resources.resources
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csproj.GenerateResource.cache
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csproj.CoreCompileInputs.cache
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.exe
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.pdb
