@@ -1,0 +1,21 @@
+﻿{
+   "fields": {
+      "project": {
+         "key": "${projectKey}"
+      },
+      "summary": "${summary}",
+      "description": "${description}",
+      "issuetype": {
+         "name": "Test Execution"
+      },
+      "priority": {
+         "name": "${priority}"
+      },
+      "labels": [
+         "${labels}"
+      ],
+      "components": [{"name":"${components}"}],
+      "environment":"${environment}",
+      "versions": [{"name":"${affectVersions}"}]
+   }
+}

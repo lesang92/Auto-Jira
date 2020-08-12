@@ -34,22 +34,25 @@
             this.btnBrowserData = new System.Windows.Forms.Button();
             this.txtDataPath = new System.Windows.Forms.TextBox();
             this.btnExecute = new System.Windows.Forms.Button();
-            this.txtConfigInfo = new System.Windows.Forms.RichTextBox();
+            this.txtInfo = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTestPlanKey = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbIssueType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtProjectKey
             // 
-            this.txtProjectKey.Location = new System.Drawing.Point(127, 33);
+            this.txtProjectKey.Location = new System.Drawing.Point(187, 129);
             this.txtProjectKey.Name = "txtProjectKey";
-            this.txtProjectKey.Size = new System.Drawing.Size(75, 20);
+            this.txtProjectKey.Size = new System.Drawing.Size(121, 20);
             this.txtProjectKey.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 36);
+            this.label1.Location = new System.Drawing.Point(112, 132);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 2;
@@ -58,7 +61,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 78);
+            this.label2.Location = new System.Drawing.Point(112, 174);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 5;
@@ -66,7 +69,7 @@
             // 
             // btnBrowserData
             // 
-            this.btnBrowserData.Location = new System.Drawing.Point(359, 73);
+            this.btnBrowserData.Location = new System.Drawing.Point(419, 169);
             this.btnBrowserData.Name = "btnBrowserData";
             this.btnBrowserData.Size = new System.Drawing.Size(75, 23);
             this.btnBrowserData.TabIndex = 4;
@@ -76,33 +79,34 @@
             // 
             // txtDataPath
             // 
-            this.txtDataPath.Location = new System.Drawing.Point(127, 75);
+            this.txtDataPath.Location = new System.Drawing.Point(187, 171);
             this.txtDataPath.Name = "txtDataPath";
             this.txtDataPath.Size = new System.Drawing.Size(217, 20);
             this.txtDataPath.TabIndex = 3;
             // 
             // btnExecute
             // 
-            this.btnExecute.Location = new System.Drawing.Point(188, 365);
+            this.btnExecute.Location = new System.Drawing.Point(248, 461);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 6;
             this.btnExecute.Text = "Execute";
             this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
-            // txtConfigInfo
+            // txtInfo
             // 
-            this.txtConfigInfo.Location = new System.Drawing.Point(55, 131);
-            this.txtConfigInfo.Name = "txtConfigInfo";
-            this.txtConfigInfo.ReadOnly = true;
-            this.txtConfigInfo.Size = new System.Drawing.Size(379, 176);
-            this.txtConfigInfo.TabIndex = 7;
-            this.txtConfigInfo.Text = "";
+            this.txtInfo.Location = new System.Drawing.Point(115, 227);
+            this.txtInfo.Name = "txtInfo";
+            this.txtInfo.ReadOnly = true;
+            this.txtInfo.Size = new System.Drawing.Size(379, 176);
+            this.txtInfo.TabIndex = 7;
+            this.txtInfo.Text = "";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(250, 36);
+            this.label3.Location = new System.Drawing.Point(417, 128);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 9;
@@ -110,19 +114,46 @@
             // 
             // txtTestPlanKey
             // 
-            this.txtTestPlanKey.Location = new System.Drawing.Point(325, 33);
+            this.txtTestPlanKey.Location = new System.Drawing.Point(492, 125);
             this.txtTestPlanKey.Name = "txtTestPlanKey";
             this.txtTestPlanKey.Size = new System.Drawing.Size(75, 20);
             this.txtTestPlanKey.TabIndex = 8;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(74, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Choose Issue Type";
+            // 
+            // cmbIssueType
+            // 
+            this.cmbIssueType.FormattingEnabled = true;
+            this.cmbIssueType.Items.AddRange(new object[] {
+            "TestExecution",
+            "Sub-TestExection"});
+            this.cmbIssueType.Location = new System.Drawing.Point(187, 92);
+            this.cmbIssueType.Name = "cmbIssueType";
+            this.cmbIssueType.Size = new System.Drawing.Size(121, 21);
+            this.cmbIssueType.TabIndex = 11;
+            this.cmbIssueType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 450);
+            this.ClientSize = new System.Drawing.Size(752, 499);
+            this.Controls.Add(this.cmbIssueType);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTestPlanKey);
-            this.Controls.Add(this.txtConfigInfo);
+            this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.btnExecute);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnBrowserData);
@@ -144,9 +175,12 @@
         private System.Windows.Forms.Button btnBrowserData;
         private System.Windows.Forms.TextBox txtDataPath;
         private System.Windows.Forms.Button btnExecute;
-        private System.Windows.Forms.RichTextBox txtConfigInfo;
+        private System.Windows.Forms.RichTextBox txtInfo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTestPlanKey;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbIssueType;
     }
 }
 
