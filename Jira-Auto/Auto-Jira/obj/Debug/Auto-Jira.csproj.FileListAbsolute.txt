@@ -8,3 +8,13 @@ D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csproj.GenerateReso
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csproj.CoreCompileInputs.cache
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.exe
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.pdb
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\EPPlus.dll
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Nancy.dll
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Newtonsoft.Json.dll
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\RestSharp.dll
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\EPPlus.xml
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Nancy.xml
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Newtonsoft.Json.xml
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\RestSharp.xml
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Debug\Auto-Jira.csproj.CopyComplete
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Debug\Template\CreateTestExecution.json

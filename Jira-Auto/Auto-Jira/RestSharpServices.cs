@@ -24,6 +24,8 @@ namespace Auto_Jira
         private static String GEN_TOKEN_XRAY_ENPOINT = JIRA_BASE_URL + "plugins/servlet/ac/com.xpandit.plugins.xray/issue-picker-dialog";
         private static String GET_JIRA_ISSUE_INFO_ENPOINT = JIRA_BASE_URL + "rest/api/2/issue/";
         private static String JIRA_AUTHORIZATION = "Basic " + ConfigurationManager.AppSettings["jira.apiToken"];
+        private static String TEST_ENVIRONMENT_ENDPOINT = XRAY_BASE_URL + "api/internal/testExec";
+        private static String TGET_PROJECT_ID_ENDPOINT = JIRA_BASE_URL + "rest/api/2/project/";
         public static RestSharpServices getInstance()
         {
             return instance;
@@ -36,8 +38,8 @@ namespace Auto_Jira
             request.AddHeader("Accept", ContentType.Json);
             request.AddHeader("Authorization", JIRA_AUTHORIZATION);
             request.Method = Method.POST;
-            String body = buildBodyTestExecution(testExecution);
-            request.AddJsonBody(body);
+            testExecution.fields.issuetype = new Field { name = "Test Execution" };
+            request.AddJsonBody(testExecution.toJson());
             IRestResponse response = client.Post(request);
             testExecution.isSuccessfully = response.IsSuccessful;
             if (response.IsSuccessful)
@@ -47,20 +49,54 @@ namespace Auto_Jira
                 testExecution.id = jObject.GetValue("id").ToString();
                 testExecution.summary = testExecution.fields.summary;
             }
+            else
+            {
+                testExecution.errorMessage = response.Content;
+            }
             return testExecution;
+        }
+
+        public void doRequestAddTestEnvironment(String projectKey, String testExecutionId, String testenvironment)
+        {
+            String projectId = doRequestGetProjectId(projectKey);
+            String enpoint = TEST_ENVIRONMENT_ENDPOINT +"/"+ testExecutionId + "/testEnvironments";
+            String body = "{\"testEnvironments\":[\"" + testenvironment + "\"],\"projectId\":\"" + projectId + "\"}"; 
+            var client = new RestClient(enpoint);
+            var request = new RestRequest();
+            String xrayToken = doRequestGeneraterXrayToken();
+            request.AddHeader("Content-Type", ContentType.Json);
+            request.AddHeader("X-acpt", xrayToken);
+            request.AddJsonBody(body);
+            IRestResponse response = client.Post(request);
+        }
+        public SubTestExecutionInfo doRequestCreateSubTestExecution(SubTestExecutionInfo subTestExecution)
+        {
+            var client = new RestClient(CREATE_TESTEXECUTION_ENPOINT);
+            var request = new RestRequest();
+            request.AddHeader("Content-Type", ContentType.Json);
+            request.AddHeader("Accept", ContentType.Json);
+            request.AddHeader("Authorization", JIRA_AUTHORIZATION);
+            request.Method = Method.POST;
+            subTestExecution.fields.issuetype = new Field { name = "Sub Test Execution" };
+            request.AddJsonBody(subTestExecution.toJson());
+            IRestResponse response = client.Post(request);
+            subTestExecution.isSuccessfully = response.IsSuccessful;
+            if (response.IsSuccessful)
+            {
+                JObject jObject = JObject.Parse(response.Content);
+                subTestExecution.key = jObject.GetValue("key").ToString();
+                subTestExecution.id = jObject.GetValue("id").ToString();
+            }
+            return subTestExecution;
         }
 
         private String buildBodyTestExecution(IssueInfo testExecution)
         {
             string startupPath = System.IO.Directory.GetCurrentDirectory() + "\\Template\\CreateTestExecution.json";
             var jsonString = File.ReadAllText(startupPath);
-            JObject obj = JObject.Parse(jsonString);
-            obj["fields"]["project"]["key"] = testExecution.fields.project.key;
-            obj["fields"]["summary"] = testExecution.fields.summary;
-            obj["fields"]["description"] = testExecution.fields.description;
-            obj["fields"]["summary"] = testExecution.fields.summary;
-            string result = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented);
-            return result;
+            FieldsPojo fields = testExecution.fields;
+           
+            return jsonString;
         }
 
         public String doRequestGeneraterXrayToken()
@@ -80,6 +116,19 @@ namespace Auto_Jira
         public String doRequestGetIssueId(String issueKey)
         {
             String endpoint = GET_JIRA_ISSUE_INFO_ENPOINT + issueKey;
+            var client = new RestClient(endpoint);
+            var request = new RestRequest();
+            request.AddHeader("Content-Type", ContentType.Json);
+            request.AddHeader("Authorization", JIRA_AUTHORIZATION);
+            IRestResponse response = client.Get(request);
+            String id = JObject.Parse(response.Content).GetValue("id").ToString();
+            return id;
+        }
+
+
+        public String doRequestGetProjectId(String projectKey)
+        {
+            String endpoint = TGET_PROJECT_ID_ENDPOINT + projectKey;
             var client = new RestClient(endpoint);
             var request = new RestRequest();
             request.AddHeader("Content-Type", ContentType.Json);

@@ -106,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(417, 128);
+            this.label3.Location = new System.Drawing.Point(404, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 9;
@@ -114,7 +114,7 @@
             // 
             // txtTestPlanKey
             // 
-            this.txtTestPlanKey.Location = new System.Drawing.Point(492, 125);
+            this.txtTestPlanKey.Location = new System.Drawing.Point(479, 93);
             this.txtTestPlanKey.Name = "txtTestPlanKey";
             this.txtTestPlanKey.Size = new System.Drawing.Size(75, 20);
             this.txtTestPlanKey.TabIndex = 8;
