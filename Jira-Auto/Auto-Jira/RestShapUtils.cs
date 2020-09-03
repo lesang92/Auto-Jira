@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Auto_Jira
 {
@@ -31,37 +32,100 @@ namespace Auto_Jira
             return instance;
         }
 
-        public string buildRequestBody(Issue issue, IssueType issueType, string projectId)
+        public string buildRequestBodyTestExecution(TestExecution testExecution)
         {
-            Issue newIssue = issue;
-            newIssue.fields.testEnvironment = "";
-            newIssue.fields.testPlanKey = "";
-            newIssue.fields.project.id = projectId;
-            newIssue.fields.issuetype.name = issueType.ToString();
-            var deserializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(newIssue);
-            var serializerSettings = new JsonSerializerSettings
+            FieldsTestExecution fields = new FieldsTestExecution
             {
-                NullValueHandling = NullValueHandling.Ignore,
-                DefaultValueHandling = DefaultValueHandling.Ignore
+                project = testExecution.fields.project,
+                priority = testExecution.fields.priority,
+                summary = testExecution.fields.summary,
+                description = testExecution.fields.description,
+                labels = testExecution.fields.labels,
+                issuetype = new FieldByName { name = "Test Execution" },
+                environment = testExecution.fields.environment,
+                versions = testExecution.fields.versions
             };
-            var newSerializedObject = JsonConvert.SerializeObject(deserializedObject, serializerSettings);
-            return newSerializedObject.ToString();
+            TestExecution testExecClone = new TestExecution { fields = fields };
+            var settings = new JsonSerializerSettings();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.DefaultValueHandling = DefaultValueHandling.Ignore;
+            
+            return JsonConvert.SerializeObject(testExecClone, settings);
         }
 
-
-        public ResponseInfo doRequestCreateIssue(Issue issue, IssueType issueType, string projectKey)
+        public string buildRequestBodySubTestExecution(SubTestExecution subTestExecution)
         {
-            string projectId = doRequestGetProjectId(projectKey);
-            ResponseInfo responseInfo = new ResponseInfo();
-            if (projectId == null)
+            FieldsSubTestExecutionCreate fields = new FieldsSubTestExecutionCreate
             {
-                return new ResponseInfo
-                {
-                    isSuccess = false,
-                    message = String.Format("Project key: {0} invalid", projectKey)
-                };
+                components = subTestExecution.fields.components,
+                priority = subTestExecution.fields.priority,
+                parent = subTestExecution.fields.parent,
+                summary = subTestExecution.fields.summary,
+                description = subTestExecution.fields.description,
+                labels = subTestExecution.fields.labels,
+                project = subTestExecution.fields.project,
+                issuetype = new FieldByName { name = "Sub Test Execution" }
+            };
+            SubTestExecutionCreate subTest = new SubTestExecutionCreate { fields = fields };
+            var settings = new JsonSerializerSettings();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.DefaultValueHandling = DefaultValueHandling.Ignore;
+            return JsonConvert.SerializeObject(subTest, settings);
+        }
+        public ResponseInfo doRequestCreateSubTestExecution(SubTestExecution subTestExecution)
+        {
+            ResponseInfo responseInfo = new ResponseInfo();
+            var body = buildRequestBodySubTestExecution(subTestExecution);
+            var request = new RestRequest();
+            var client = new RestClient(CREATE_TEST_EXECUTION_ENPOINT);
+            request.AddHeader("Content-Type", ContentType.Json);
+            request.AddHeader("Accept", ContentType.Json);
+            request.AddHeader("Authorization", JIRA_AUTHORIZATION);
+            request.Method = Method.POST;
+            request.AddJsonBody(body);
+            IRestResponse response = client.Post(request);
+            if (!response.IsSuccessful)
+            {
+                responseInfo.isSuccess = false;
+                responseInfo.message = response.Content;
             }
-            var body = buildRequestBody(issue, issueType, projectId);
+            else{
+                JObject jObject = JObject.Parse(response.Content);
+                responseInfo.isSuccess = true;
+                string id = jObject.GetValue("id").ToString();
+                string key = jObject.GetValue("key").ToString();
+                responseInfo.id = id;
+                responseInfo.key = key;
+                ResponseInfo responseInfoAddTestEnvironment = doRequestAddTestEnvironment(subTestExecution.fields.project.key, id, subTestExecution.fields.testEnvironment);
+                if (!responseInfoAddTestEnvironment.isSuccess)
+                {
+                    responseInfo.message = responseInfoAddTestEnvironment.message;
+                    return responseInfo;
+                }
+
+                if (!string.IsNullOrEmpty(subTestExecution.fields.testPlanKey))
+                {
+                    ResponseInfo responseAddTestPlan = doRequestAddTestExecutionToTestPlan(subTestExecution.fields.testPlanKey, id);
+                    if (!responseAddTestPlan.isSuccess)
+                    {
+                        responseInfo.message = responseAddTestPlan.message;
+                    }
+                }
+                if (responseInfo.isSuccess)
+                {
+                    responseInfo.message = String.Format("Create sub test execution with key: {0} success", key);
+                }
+            }
+            if (!responseInfo.isSuccess)
+            {
+                responseInfo.message = subTestExecution.fields.summary + "_" + responseInfo.message;
+            }
+            return responseInfo;
+        }
+        public ResponseInfo doRequestCreateTestExecution(TestExecution testExecution)
+        {
+            ResponseInfo responseInfo = new ResponseInfo();           
+            var body = buildRequestBodyTestExecution(testExecution);
             var client = new RestClient(CREATE_TEST_EXECUTION_ENPOINT);
             var request = new RestRequest();
             request.AddHeader("Content-Type", ContentType.Json);
@@ -83,25 +147,33 @@ namespace Auto_Jira
                 string key = jObject.GetValue("key").ToString();
                 responseInfo.id = id;
                 responseInfo.key = key;
-                ResponseInfo responseInfoAddTestEnvironment = doRequestAddTestEnvironment(projectKey, id, issue.fields.testEnvironment);
+                ResponseInfo responseInfoAddTestEnvironment = doRequestAddTestEnvironment(testExecution.fields.project.key, id, testExecution.fields.testEnvironment);
                 if (!responseInfoAddTestEnvironment.isSuccess)
                 {
                     responseInfo.message = responseInfoAddTestEnvironment.message;
                     return responseInfo;
                 }
-                ResponseInfo responseAddTestPlan = doRequestAddTestExecutionToTestPlan(issue.fields.testPlanKey, id);
-                if (!responseAddTestPlan.isSuccess)
+                if (!string.IsNullOrEmpty(testExecution.fields.testPlanKey))
                 {
-                    responseInfo.message = responseAddTestPlan.message;
+                    ResponseInfo responseAddTestPlan = doRequestAddTestExecutionToTestPlan(testExecution.fields.testPlanKey, id);
+                    if (!responseAddTestPlan.isSuccess)
+                    {
+                        responseInfo.message = responseAddTestPlan.message;
+                    }                   
                 }
                 if (responseInfo.isSuccess)
                 {
                     responseInfo.message = String.Format("Create test execution with key: {0} success", key);
                 }
             }
+            if (!responseInfo.isSuccess)
+            {
+                responseInfo.message = testExecution.fields.summary + "_" + responseInfo.message;
+            }
             return responseInfo;
         }
 
+       
         public ResponseInfo doRequestAddTestEnvironment(String projectKey, String testExecutionId, String testenvironment)
         {
             ResponseInfo responseInfo = new ResponseInfo();
@@ -142,7 +214,7 @@ namespace Auto_Jira
             request.AddHeader("Content-Type", ContentType.Json);
             request.AddHeader("X-acpt", xrayToken);
             String arrTestExec = "";
-            arrTestExec += "[\"" + testExecutionId + "]\",";           
+            arrTestExec += "\"" + testExecutionId + "\",";           
             String arrTestExecBody = "[" + arrTestExec.Substring(0, arrTestExec.Length - 1) + "]";
             request.AddParameter("application/json", arrTestExecBody, ParameterType.RequestBody);         
             IRestResponse response = client.Post(request);
