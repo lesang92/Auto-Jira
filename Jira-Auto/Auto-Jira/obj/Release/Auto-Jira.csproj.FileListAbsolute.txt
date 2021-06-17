@@ -18,3 +18,5 @@ D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Release\Auto-Jira.csproj.CopyComple
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Release\Auto-Jira.exe
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\obj\Release\Auto-Jira.pdb
 D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Release\Template\CreateTestExecution.json
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Release\Template\SubTest Execution template.xlsx
+D:\PROJECT\Auto-Jira\Jira-Auto\Auto-Jira\bin\Release\Template\Test Execution template.xlsx

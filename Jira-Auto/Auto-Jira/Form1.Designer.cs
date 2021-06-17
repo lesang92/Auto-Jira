@@ -43,7 +43,7 @@
             // txtProjectKey
             // 
             this.txtProjectKey.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProjectKey.Location = new System.Drawing.Point(187, 129);
+            this.txtProjectKey.Location = new System.Drawing.Point(261, 73);
             this.txtProjectKey.Name = "txtProjectKey";
             this.txtProjectKey.Size = new System.Drawing.Size(121, 22);
             this.txtProjectKey.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(112, 132);
+            this.label1.Location = new System.Drawing.Point(186, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 14);
             this.label1.TabIndex = 2;
@@ -62,7 +62,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(149, 178);
+            this.label2.Location = new System.Drawing.Point(223, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 14);
             this.label2.TabIndex = 5;
@@ -71,7 +71,7 @@
             // btnBrowserData
             // 
             this.btnBrowserData.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowserData.Location = new System.Drawing.Point(419, 169);
+            this.btnBrowserData.Location = new System.Drawing.Point(493, 113);
             this.btnBrowserData.Name = "btnBrowserData";
             this.btnBrowserData.Size = new System.Drawing.Size(75, 23);
             this.btnBrowserData.TabIndex = 4;
@@ -82,7 +82,7 @@
             // txtDataPath
             // 
             this.txtDataPath.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDataPath.Location = new System.Drawing.Point(187, 171);
+            this.txtDataPath.Location = new System.Drawing.Point(261, 115);
             this.txtDataPath.Name = "txtDataPath";
             this.txtDataPath.Size = new System.Drawing.Size(217, 22);
             this.txtDataPath.TabIndex = 3;
@@ -90,7 +90,7 @@
             // btnExecute
             // 
             this.btnExecute.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExecute.Location = new System.Drawing.Point(187, 418);
+            this.btnExecute.Location = new System.Drawing.Point(169, 417);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 6;
@@ -101,10 +101,10 @@
             // txtInfo
             // 
             this.txtInfo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInfo.Location = new System.Drawing.Point(115, 227);
+            this.txtInfo.Location = new System.Drawing.Point(12, 168);
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.ReadOnly = true;
-            this.txtInfo.Size = new System.Drawing.Size(714, 176);
+            this.txtInfo.Size = new System.Drawing.Size(817, 243);
             this.txtInfo.TabIndex = 7;
             this.txtInfo.Text = "";
             // 
@@ -116,7 +116,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(146, 95);
+            this.label4.Location = new System.Drawing.Point(220, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 10;
@@ -129,7 +129,7 @@
             this.cmbIssueType.Items.AddRange(new object[] {
             "TestExecution",
             "Sub-TestExection"});
-            this.cmbIssueType.Location = new System.Drawing.Point(187, 92);
+            this.cmbIssueType.Location = new System.Drawing.Point(261, 36);
             this.cmbIssueType.Name = "cmbIssueType";
             this.cmbIssueType.Size = new System.Drawing.Size(121, 22);
             this.cmbIssueType.TabIndex = 11;
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 499);
+            this.ClientSize = new System.Drawing.Size(841, 466);
             this.Controls.Add(this.cmbIssueType);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtInfo);
@@ -150,7 +150,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtProjectKey);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Jira tool";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -8,39 +8,18 @@ using System.Threading.Tasks;
 
 namespace Auto_Jira
 {
-    class IssueEntities
+    class Entities
     {
     }
-
-    public class TestExecution: ICloneable
+    public class TestExecution
     {
         public FieldsTestExecution fields { get; set; }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
     }
-
-    public class TestExecutionCreate
-    {
-        public FieldsTestExecutionCreate fields { get; set; }
-    }
-
-    public class SubTestExecution: ICloneable
+    public class SubTestExecution
     {
         public FieldsSubTestExecution fields { get; set; }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
     }
 
-    public class SubTestExecutionCreate
-    {
-        public FieldsSubTestExecutionCreate fields { get; set; }
-    }
     public class FieldsTestExecution
     {
         public FieldByKey project { get; set; }
@@ -55,21 +34,6 @@ namespace Auto_Jira
         public string testEnvironment { get; set; }
         public string testPlanKey { get; set; }
     }
-
-    public class FieldsTestExecutionCreate
-    {
-        public FieldByKey project { get; set; }
-        public string summary { get; set; }
-        public FieldByName issuetype { get; set; }
-        public FieldByName priority { get; set; }
-        public string[] labels { get; set; }
-        public List<FieldByName> versions { get; set; }
-        public string environment { get; set; }
-        public string description { get; set; }
-        public List<FieldByName> components { get; set; }
-        public string testPlanKey { get; set; }
-    }
-
     public class FieldsSubTestExecution
     {
         public FieldByKey project { get; set; }
@@ -82,18 +46,6 @@ namespace Auto_Jira
         public List<FieldByName> components { get; set; }
         public FieldByName priority { get; set; }
         public string testPlanKey { get; set; }
-    }
-
-    public class FieldsSubTestExecutionCreate
-    {
-        public FieldByKey project { get; set; }
-        public string summary { get; set; }
-        public string description { get; set; }
-        public FieldByName issuetype { get; set; }
-        public FieldByKey parent { get; set; }
-        public string[] labels { get; set; }
-        public List<FieldByName> components { get; set; }
-        public FieldByName priority { get; set; }
     }
     public class FieldByName
     {

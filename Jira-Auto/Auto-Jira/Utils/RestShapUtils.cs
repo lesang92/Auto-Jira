@@ -55,7 +55,7 @@ namespace Auto_Jira
 
         public string buildRequestBodySubTestExecution(SubTestExecution subTestExecution)
         {
-            FieldsSubTestExecutionCreate fields = new FieldsSubTestExecutionCreate
+            FieldsSubTestExecution fields = new FieldsSubTestExecution
             {
                 components = subTestExecution.fields.components,
                 priority = subTestExecution.fields.priority,
@@ -66,7 +66,7 @@ namespace Auto_Jira
                 project = subTestExecution.fields.project,
                 issuetype = new FieldByName { name = "Sub Test Execution" }
             };
-            SubTestExecutionCreate subTest = new SubTestExecutionCreate { fields = fields };
+            SubTestExecution subTest = new SubTestExecution { fields = fields };
             var settings = new JsonSerializerSettings();
             settings.NullValueHandling = NullValueHandling.Ignore;
             settings.DefaultValueHandling = DefaultValueHandling.Ignore;
